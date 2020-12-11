@@ -1,6 +1,7 @@
 import React from "react";
 
 function Checkout() {
+    const [isOrder, setIsOrder] = React.useState(false);
     const [count, setCount] = React.useState(0);
     const [total, setTotal] = React.useState(0);
     const [data, setData] = React.useState()
@@ -26,7 +27,7 @@ function Checkout() {
         await getData()
     }
 
-    function _handleIncrement(item ) {
+    function _handleIncrement(item) {
         setCount(count + 1)
     }
 
@@ -36,6 +37,7 @@ function Checkout() {
     }
 
     const _handleOrder = async () => {
+        alert(' Ожидайте товар. Спасибо что выбрали нас!');
         await localStorage.clear()
         await getData()
     }
@@ -58,7 +60,7 @@ function Checkout() {
                                         <h3 className="text-sm text-gray-600">{it.title}</h3>
                                         <div className="flex items-center mt-2">
                                             <button
-                                                onClick={()=>_handleIncrement(it)}
+                                                onClick={() => _handleIncrement(it)}
                                                 className="text-gray-500 focus:outline-none focus:text-gray-600">
                                                 <svg className="h-5 w-5" fill="none" strokeLinecap="round"
                                                      strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"
@@ -69,7 +71,7 @@ function Checkout() {
                                             </button>
                                             <span className="text-gray-700 mx-2">{count}</span>
                                             <button
-                                                onClick={()=>_handleDecrement(it)}
+                                                onClick={() => _handleDecrement(it)}
                                                 className="text-gray-500 focus:outline-none focus:text-gray-600">
                                                 <svg className="h-5 w-5" fill="none" strokeLinecap="round"
                                                      strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"
@@ -93,10 +95,76 @@ function Checkout() {
                             </h3>
                         </div>
                         <button
-                            onClick={()=>_handleOrder()}
+                            onClick={() => setIsOrder(!isOrder)}
                             className='bg-gray-700 text-gray-100 px-2 py-4 my-3 w-full font-medium rounded'>
-                            Оплатить
+                            Прододжить
                         </button>
+                        {isOrder === true && <div>
+                        <hr className='mt-4 mb-5'/>
+                            <div className="leading-loose">
+                                <form className="max-w-xl p-5 bg-white rounded shadow-xl">
+                                    <p className="text-gray-800 font-medium">Customer information</p>
+                                    <div className="">
+                                        <label className="block text-sm text-gray-00" htmlFor="cus_name">Name</label>
+                                        <input className="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded"
+                                               id="cus_name" name="cus_name" type="text" required=""
+                                               placeholder="Your Name" aria-label="Name"/>
+                                    </div>
+                                    <div className="mt-2">
+                                        <label className="block text-sm text-gray-600" htmlFor="cus_email">Email</label>
+                                        <input className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
+                                               id="cus_email" name="cus_email" type="text" required=""
+                                               placeholder="Your Email" aria-label="Email"/>
+                                    </div>
+                                    <div className="mt-2">
+                                        <label className=" block text-sm text-gray-600"
+                                               htmlFor="cus_email">Address</label>
+                                        <input className="w-full px-2 py-4 text-gray-700 bg-gray-200 rounded"
+                                               id="cus_email" name="cus_email" type="text" required=""
+                                               placeholder="Street" aria-label="Email"/>
+                                    </div>
+                                    <div className="mt-2">
+                                        <label className="hidden text-sm block text-gray-600"
+                                               htmlFor="cus_email">City</label>
+                                        <input className="w-full px-2 py-4 text-gray-700 bg-gray-200 rounded"
+                                               id="cus_email" name="cus_email" type="text" required=""
+                                               placeholder="City" aria-label="Email"/>
+                                    </div>
+                                    <div className="inline-block mt-2 w-1/2 pr-1">
+                                        <label className="hidden block text-sm text-gray-600"
+                                               htmlFor="cus_email">Country</label>
+                                        <input className="w-full px-2 py-4 text-gray-700 bg-gray-200 rounded"
+                                               id="cus_email" name="cus_email" type="text" required=""
+                                               placeholder="Country" aria-label="Email"/>
+                                    </div>
+                                    <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
+                                        <label className="hidden block text-sm text-gray-600"
+                                               htmlFor="cus_email">Zip</label>
+                                        <input className="w-full px-2 py-4 text-gray-700 bg-gray-200 rounded"
+                                               id="cus_email" name="cus_email" type="text" required="" placeholder="Zip"
+                                               aria-label="Email"/>
+                                    </div>
+                                    <p className="mt-4 text-gray-800 font-medium">Payment information</p>
+                                    <div className="">
+                                        <label className="block text-sm text-gray-600" htmlFor="cus_name">Card</label>
+                                        <input className="w-full px-2 py-4 text-gray-700 bg-gray-200 rounded"
+                                               id="cus_name" name="cus_name" type="text" required=""
+                                               placeholder="Card Number MM/YY CVC" aria-label="Name"/>
+                                    </div>
+                                    <div className="mt-4">
+                                        <button
+                                            onClick={() => _handleOrder()}
+                                            className="
+px-2 py-4 my-3 w-full font-medium rounded'
+
+                                            px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+                                            type="submit">
+                                            Оплатить
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>}
                     </div>
 
                 </div>
